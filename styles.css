@@ -1,0 +1,9 @@
+.container {
+	box-sizing: border-box;
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.flex {
+	display: flex;
+}
