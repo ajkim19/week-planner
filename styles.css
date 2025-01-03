@@ -21,7 +21,8 @@ h2 {
 
 p,
 th,
-select {
+select,
+label {
 	font-size: 12px;
 }
 
@@ -98,10 +99,14 @@ footer {
 	margin-bottom: 12px;
 }
 
-.event-time {
+#event-scheduler {
+  border: 2px solid black;
+}
+
+.event-time-col {
   width: 160px;
 }
 
-.event-info {
+.event-info-col {
   width: 365px;
 }

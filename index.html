@@ -31,12 +31,35 @@
 				</select>
 			</div>
 			<button class="add-event-btn">Add New Event</button>
+			<div id="event-scheduler" class="modal">
+				<form class="event-scheduler-form flex">
+					<label for="time-event">Time of Event:</label>
+					<select name="time-event" id="time-event">
+						<option value="">Choose a Time</option>
+					</select>
+					<label for="day-event">Day of Week:</label>
+					<select name="day-event" id="day-event">
+						<option value="">Choose a Day</option>
+						<option value="monday">Monday</option>
+						<option value="tuesday">Tuesday</option>
+						<option value="wednesday">Wednesday</option>
+						<option value="thursday">Thursday</option>
+						<option value="friday">Friday</option>
+						<option value="saturday">Saturday</option>
+						<option value="sunday">Sunday</option>
+					</select>
+					<label for="event-info">Event Information:</label>
+					<textarea name="event-info" id="event-info"></textarea>
+					<button>Cancel</button>
+					<button>Confirm</button>
+				</form>
+			</div>
 			<table>
 				<thead>
 					<tr>
-						<th class="event-time">Time</th>
-						<th class="event-info">Event</th>
-						<th class="event-actions">Actions</th>
+						<th class="event-time-col">Time</th>
+						<th class="event-info-col">Event</th>
+						<th class="event-actions-col">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
