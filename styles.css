@@ -108,9 +108,10 @@ footer {
 
 #event-scheduler {
 	display: block;
-	width: 240px;
+	width: 245px;
   border: 2px solid black;
-}
+	padding: 0;
+	margin-top: 250px;
 
 .event-scheduler-form {
 	flex-direction: column;
