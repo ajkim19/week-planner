@@ -12,34 +12,15 @@ const eventTableTBody = document.querySelector(".event-table > tbody");
 if (!eventTableTBody) throw new Error("eventTableTBody does not exist");
 const dayOfWeek = document.querySelector(".day-of-week");
 if (!dayOfWeek) throw new Error("dayOfWeek does not exist");
+const backdrop = document.getElementById("backdrop");
+if (!backdrop) throw new Error("backdrop does not exist");
+const schedulerCancelBtn = document.querySelector(".scheduler-cancel-btn");
+if (!schedulerCancelBtn) throw new Error("schedulerCancelBtn does not exist");
+
 const timeList = [];
 const events = { monday: { event: "Dog Park", time: "1200" } };
 
-for (let i = 0; i < 24; i++) {
-	const hr = i.toString().padStart(2, "0");
-	const onHour = document.createElement("option");
-	onHour.value = `${hr}00`;
-	onHour.text = `${hr}00`;
-	timeList.push(`${hr}00`);
-	schedulerTime.appendChild(onHour);
-	const onHalfHour = document.createElement("option");
-	onHalfHour.value = `${hr}30`;
-	onHalfHour.text = `${hr}30`;
-	timeList.push(`${hr}30`);
-	schedulerTime.appendChild(onHalfHour);
-}
-
-for (let i = 0; i < 10; i++) {
-	const row = document.createElement("tr");
-	for (let j = 0; j < 3; j++) {
-		const cell = document.createElement("td");
-		row.appendChild(cell);
-	}
-	eventTableTBody.appendChild(row);
-}
-
-function addEvent() {
-	scheduler.style.display = "block";
+function createTable() {
 	eventTableTBody.innerHTML = "";
 	const day = dayOfWeek.value;
 	let eventCounter = 0;
@@ -82,4 +63,25 @@ function addEvent() {
 	}
 }
 
-addEventBtn.addEventListener("click", addEvent);
+function openScheduler() {
+	scheduler.style.display = "block";
+	backdrop.style.display = "block";
+}
+
+for (let i = 0; i < 24; i++) {
+	const hr = i.toString().padStart(2, "0");
+	const onHour = document.createElement("option");
+	onHour.value = `${hr}00`;
+	onHour.text = `${hr}00`;
+	timeList.push(`${hr}00`);
+	schedulerTime.appendChild(onHour);
+	const onHalfHour = document.createElement("option");
+	onHalfHour.value = `${hr}30`;
+	onHalfHour.text = `${hr}30`;
+	timeList.push(`${hr}30`);
+	schedulerTime.appendChild(onHalfHour);
+}
+
+createTable();
+
+addEventBtn.addEventListener("click", openScheduler);
