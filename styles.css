@@ -1,6 +1,6 @@
 body {
 	box-sizing: border-box;
-	font-family: "Inter", serif;
+	font-family: "Inter", sans-serif;
 	margin: 0;
 }
 
@@ -10,11 +10,13 @@ h2 {
 }
 
 h1 {
+	font-size: 30px;
 	margin-top: 0;
+	margin-bottom: 24px;
 }
 
 h2 {
-  margin-bottom: 45px;
+	margin-bottom: 42px;
 }
 
 p,
@@ -23,62 +25,71 @@ select {
 	font-size: 12px;
 }
 
-p {
-	width: 115px;
-  margin: 6px 0;
-}
-
 select {
 	border: 1px solid #f1f1f1;
 	border-radius: 5px;
-  width: 115px;
-	padding: 6px 4px;
-	margin-bottom: 80px;
+	width: 120px;
+	padding: 6px 5px;
+	margin-top: 4px;
+	margin-bottom: 74px;
 }
 
 table {
 	border-collapse: collapse;
 	width: 100%;
+  margin: bottom;
+  margin-bottom: 43px;
 }
 
 tr {
-	height: 40px;
+	height: 43px;
 }
 
 tr:nth-child(odd) {
-	background-color: #f1f1f1;
+	background-color: #f4f4f4;
 }
 
 td,
 th {
-	border: 1px solid #f1f1f1;
+	border: 1px solid #ececec;
 	text-align: left;
-	padding: 8px;
+	padding: 8px 6px;
 }
 
 th {
-  vertical-align: bottom;
+	vertical-align: bottom;
 	font-weight: bold;
 	background-color: white;
 }
 
 footer {
 	align-self: start;
+  margin
 }
 
 .container {
 	box-sizing: border-box;
-
 	width: 1000px;
 	margin: 0 auto;
 }
 
 .flex {
 	display: flex;
-  flex-direction: column;
+	flex-direction: column;
 	align-items: center;
 }
 
-.day-show-event {
-  justify
+.day-of-week-title {
+	width: 120px;
+	margin: 4px 0;
+}
+
+.add-event-btn {
+	font-size: 12px;
+	color: white;
+	background-color: rgb(110, 118, 126);
+	border: 0;
+	border-radius: 5px;
+	padding: 8px 11px;
+	margin-bottom: 12px;
 }
