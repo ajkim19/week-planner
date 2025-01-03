@@ -108,6 +108,10 @@ footer {
 	margin-bottom: 12px;
 }
 
+.add-event-btn:hover {
+	cursor: pointer;
+}
+
 #scheduler {
 	display: 0;
 	width: 245px;
