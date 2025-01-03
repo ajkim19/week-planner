@@ -25,15 +25,6 @@ select {
 	font-size: 12px;
 }
 
-select {
-	border: 1px solid #f1f1f1;
-	border-radius: 5px;
-	width: 120px;
-	padding: 6px 5px;
-	margin-top: 4px;
-	margin-bottom: 74px;
-}
-
 table {
 	border-collapse: collapse;
 	width: 100%;
@@ -84,6 +75,19 @@ footer {
 	margin: 4px 0;
 }
 
+#day-of-week {
+	border: 1px solid #f1f1f1;
+	border-radius: 5px;
+	width: 120px;
+	padding: 6px 5px;
+	margin-top: 4px;
+	margin-bottom: 74px;
+}
+
+#day-of-week:focus {
+  outline-color: dodgerblue;
+}
+
 .add-event-btn {
 	font-size: 12px;
 	color: white;
@@ -92,4 +96,12 @@ footer {
 	border-radius: 5px;
 	padding: 8px 11px;
 	margin-bottom: 12px;
+}
+
+.event-time {
+  width: 160px;
+}
+
+.event-info {
+  width: 365px;
 }

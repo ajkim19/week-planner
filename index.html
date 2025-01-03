@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Week Planner</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -20,7 +20,7 @@
 			<div class="day-show-event flex">
 				<h2>Choose Day to Show Events</h2>
 				<p class="day-of-week-title">Day of Week</p>
-				<select name="days-of-week" id="days-of-week">
+				<select name="day-of-week" id="day-of-week">
 					<option value="monday">Monday</option>
 					<option value="tuesday">Tuesday</option>
 					<option value="wednesday">Wednesday</option>
@@ -34,9 +34,9 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Time</th>
-						<th>Event</th>
-						<th>Actions</th>
+						<th class="event-time">Time</th>
+						<th class="event-info">Event</th>
+						<th class="event-actions">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
