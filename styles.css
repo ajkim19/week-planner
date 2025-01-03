@@ -26,6 +26,16 @@ label {
 	font-size: 12px;
 }
 
+select {
+	border: 1px solid #f1f1f1;
+	border-radius: 5px;
+	padding: 6px 5px;
+}
+
+select:focus {
+  outline-color: dodgerblue;
+}
+
 table {
 	border-collapse: collapse;
 	width: 100%;
@@ -61,32 +71,29 @@ footer {
 
 .container {
 	box-sizing: border-box;
+	flex-direction: column;
+	align-items: center;
 	width: 1000px;
 	margin: 0 auto;
 }
 
 .flex {
 	display: flex;
+}
+
+.day-show-event {
 	flex-direction: column;
 	align-items: center;
 }
 
-.day-of-week-title {
+.day-of-week-title, .day-of-week {
 	width: 120px;
-	margin: 4px 0;
-}
-
-#day-of-week {
-	border: 1px solid #f1f1f1;
-	border-radius: 5px;
-	width: 120px;
-	padding: 6px 5px;
 	margin-top: 4px;
-	margin-bottom: 74px;
+	margin-bottom: 4px;
 }
 
-#day-of-week:focus {
-  outline-color: dodgerblue;
+.day-of-week {
+	margin-bottom: 74px;
 }
 
 .add-event-btn {
@@ -100,11 +107,49 @@ footer {
 }
 
 #event-scheduler {
+	display: block;
+	width: 240px;
   border: 2px solid black;
 }
 
+.event-scheduler-form {
+	flex-direction: column;
+	width: 90%;
+	margin: 14px auto;
+}
+
+#event-scheduler-time, #event-scheduler-day {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+#event-scheduler-info {
+	height: 180px;
+	width: 97%;
+	margin: 10px 0;
+}
+
+.event-scheduler-btns {
+	justify-content: space-evenly;
+}
+
+.event-scheduler-cancel-btn, .event-scheduler-confirm-btn {
+	font-size: 12px;
+	color: white;
+	border: 0;
+	border-radius: 5px;
+	padding: 8px 11px;
+}
+
+.event-scheduler-cancel-btn {
+	background-color: rgb(110, 118, 126);
+}
+.event-scheduler-confirm-btn {
+	background-color: rgb(0, 97, 0);
+}
+
 .event-time-col {
-  width: 160px;
+  width: 8;
 }
 
 .event-info-col {
