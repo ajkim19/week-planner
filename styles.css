@@ -112,9 +112,20 @@ footer {
 	cursor: pointer;
 }
 
+#backdrop {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+  width: 100vw;
+  height: 100vh;
+	background: rgba(0, 0, 0, 0.3);
+	z-index: 1;
+}
+
 #scheduler {
 	display: 0;
 	width: 245px;
+	z-index: 2;
   border: 2px solid black;
 	padding: 0;
 	margin-top: 240px;

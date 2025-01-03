@@ -1,5 +1,7 @@
 const addEventBtn = document.querySelector(".add-event-btn");
 if (!addEventBtn) throw new Error("addEventBtn does not exist");
+const scheduler = document.querySelector("#scheduler");
+if (!scheduler) throw new Error("scheduler does not exist");
 const schedulerTime = document.getElementById("scheduler-time");
 if (!schedulerTime) throw new Error("schedulerTime does not exist");
 const schedulerDay = document.getElementById("scheduler-day");
@@ -37,6 +39,8 @@ for (let i = 0; i < 10; i++) {
 }
 
 function addEvent() {
+	scheduler.style.display = "block";
+	eventTableTBody.innerHTML = "";
 	const day = dayOfWeek.value;
 	let eventCounter = 0;
 	for (const time of timeList) {
