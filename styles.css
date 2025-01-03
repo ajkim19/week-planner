@@ -44,7 +44,7 @@ table {
 }
 
 tr {
-	height: 43px;
+
 }
 
 tr:nth-child(odd) {
@@ -53,8 +53,9 @@ tr:nth-child(odd) {
 
 td,
 th {
-	border: 1px solid #ececec;
 	text-align: left;
+	height: 26px;
+	border: 1px solid #ececec;
 	padding: 8px 6px;
 }
 
