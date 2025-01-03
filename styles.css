@@ -21,10 +21,20 @@ h2 {
 
 p,
 th,
+button,
 select,
-label {
+label,
+td {
 	font-size: 12px;
 }
+
+button {
+	color: white;
+	border: 0;
+	border-radius: 5px;
+	padding: 8px 11px;
+}
+
 
 select {
 	border: 1px solid #f1f1f1;
@@ -41,10 +51,6 @@ table {
 	width: 100%;
   margin: bottom;
   margin-bottom: 43px;
-}
-
-tr {
-
 }
 
 tr:nth-child(odd) {
@@ -98,64 +104,69 @@ footer {
 }
 
 .add-event-btn {
-	font-size: 12px;
-	color: white;
 	background-color: rgb(110, 118, 126);
-	border: 0;
-	border-radius: 5px;
-	padding: 8px 11px;
 	margin-bottom: 12px;
 }
 
-#event-scheduler {
-	display: block;
+#scheduler {
+	display: 0;
 	width: 245px;
   border: 2px solid black;
 	padding: 0;
 	margin-top: 240px;
 }
 
-.event-scheduler-form {
+.scheduler-form {
 	flex-direction: column;
 	width: 90%;
 	margin: 14px auto;
 }
 
-#event-scheduler-time, #event-scheduler-day {
+#scheduler-time, #scheduler-day {
 	width: 100%;
 	margin-bottom: 10px;
 }
 
-#event-scheduler-info {
+#scheduler-event {
 	height: 195px;
 	width: 97%;
 	margin-top: 8px;
 	margin-bottom: 13px;
 }
 
-.event-scheduler-btns {
+.scheduler-btns {
 	justify-content: space-evenly;
 }
 
-.event-scheduler-cancel-btn, .event-scheduler-confirm-btn {
-	font-size: 12px;
-	color: white;
+.scheduler-cancel-btn, .scheduler-confirm-btn {
 	border: 0;
-	border-radius: 5px;
-	padding: 8px 11px;
 }
 
-.event-scheduler-cancel-btn {
+.scheduler-cancel-btn {
 	background-color: rgb(110, 118, 126);
 }
-.event-scheduler-confirm-btn {
+.scheduler-confirm-btn {
 	background-color: rgb(0, 97, 0);
 }
 
-.event-time-col {
+.event-table-time-col {
   width: 8;
 }
 
-.event-info-col {
+.event-table-info-col {
   width: 365px;
+}
+
+.event-table-actions {
+	justify-content: space-around;
+}
+
+.event-table-edit-btn {
+	align-items: center;
+	background-color: blue;
+}
+
+.event-table-delete-btn {
+	align-items: center;
+	background-color: red;
 }

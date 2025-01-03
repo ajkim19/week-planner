@@ -21,7 +21,7 @@
 				<h2>Choose Day to Show Events</h2>
 				<p class="day-of-week-title">Day of Week</p>
 				<select name="day-of-week" class="day-of-week">
-					<option value="monday">Monday</option>
+					<option value="monday" selected>Monday</option>
 					<option value="tuesday">Tuesday</option>
 					<option value="wednesday">Wednesday</option>
 					<option value="thursday">Thursday</option>
@@ -31,14 +31,14 @@
 				</select>
 			</div>
 			<button class="add-event-btn">Add New Event</button>
-			<dialog id="event-scheduler">
-				<form class="event-scheduler-form flex">
-					<label for="event-time">Time of Event:</label>
-					<select name="event-scheduler-time" id="event-scheduler-time">
+			<dialog id="scheduler">
+				<form class="scheduler-form flex">
+					<label for="scheduler-time">Time of Event:</label>
+					<select name="scheduler-time" id="scheduler-time">
 						<option value="none" selected disabled hidden>Choose a Time</option>
 					</select>
-					<label for="event-scheduler-day">Day of Week:</label>
-					<select name="event-scheduler-day" id="event-scheduler-day">
+					<label for="scheduler-day">Day of Week:</label>
+					<select name="scheduler-day" id="scheduler-day">
 						<option value="none" selected disabled hidden>Choose a Day</option>
 						<option value="monday">Monday</option>
 						<option value="tuesday">Tuesday</option>
@@ -48,77 +48,23 @@
 						<option value="saturday">Saturday</option>
 						<option value="sunday">Sunday</option>
 					</select>
-					<label for="event-scheduler-info">Event Information:</label>
-					<textarea
-						name="event-scheduler-info"
-						id="event-scheduler-info"
-					></textarea>
-					<div class="event-scheduler-btns flex">
-						<button class="event-scheduler-cancel-btn">Cancel</button>
-						<button class="event-scheduler-confirm-btn">Confirm</button>
+					<label for="scheduler-event">Event Information:</label>
+					<textarea name="scheduler-event" id="scheduler-event"></textarea>
+					<div class="scheduler-btns flex">
+						<button class="scheduler-cancel-btn">Cancel</button>
+						<button class="scheduler-confirm-btn">Confirm</button>
 					</div>
 				</form>
 			</dialog>
-			<table class="schedule-list-table">
+			<table class="event-table">
 				<thead>
 					<tr>
 						<th class="event-table-time-col">Time</th>
-						<th class="event-table-info-col">Event</th>
+						<th class="event-table-event-col">Event</th>
 						<th class="event-table-actions-col">Actions</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr class="event-table-row-1">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-2">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-3">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-4">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-5">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-6">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-7">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-8">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-9">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-					<tr class="event-table-row-10">
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</tbody>
+				<tbody></tbody>
 			</table>
 			<footer>
 				<p>2023 Week Planner Inc.</p>
