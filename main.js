@@ -21,8 +21,14 @@ const eventTableTBody = document.querySelector(".event-table > tbody");
 if (!eventTableTBody) throw new Error("eventTableTBody does not exist");
 const dayOfWeek = document.querySelector(".day-of-week");
 if (!dayOfWeek) throw new Error("dayOfWeek does not exist");
+const eventDeleteBtn = document.getElementsByClassName(
+	"event-table-delete-btn"
+);
+if (!eventDeleteBtn) throw new Error("eventDeleteBtn does not exist");
+const deleteWarning = document.getElementById("delete-warning");
+if (!deleteWarning) throw new Error("deleteWarning does not exist");
 
-// Initializes events object and adds first entry
+// Initializes events object and adds first event
 const events = { monday: [] };
 events.monday.push({ event: "Dog Park", time: "1200" });
 
@@ -46,18 +52,18 @@ function populateTimesList() {
 	}
 }
 
-// Populates the table with event entries, then with empty rows
+// Populates the table with events, then with empty rows
 function populateTable() {
 	// Resets the table by removing existing rows
 	eventTableTBody.innerHTML = "";
 	const day = dayOfWeek.value;
 	let eventCounter = 0;
 
-	// Checks for existence of entries
+	// Checks for existence of event
 	if (events[day]) {
 		// Loops through events of specified day
 		for (const event of events[day]) {
-			// Creates new row with event entries
+			// Creates new row with events
 			const row = document.createElement("tr");
 
 			// Creates the time cell
@@ -112,36 +118,36 @@ function populateTable() {
 
 // Opens scheduler modal
 function openScheduler() {
-	scheduler.style.display = "block";
+	scheduler.showModal();
 	backdrop.style.display = "block";
 }
 
 // Closes scheduler modal
 function closeScheduler() {
-	scheduler.style.display = "none";
+	scheduler.close();
 	backdrop.style.display = "none";
 	schedulerForm.reset();
 }
 
+// Adds an event to the events object
 function confirmEvent() {
-	// event.preventDefault();
 	const day = schedulerDay.value;
+
+	// Checks for existence of event
 	if (!events[day]) {
 		events[day] = [];
 	}
+
+	// Adds the event
 	events[day].push({
 		time: schedulerTime.value,
 		event: schedulerEvent.value,
 	});
+
 	populateTable();
 	closeScheduler();
 }
 
-// Startup Setup
+// Starts up setup
 populateTimesList();
 populateTable();
-
-// Event Listeners
-addEventBtn.addEventListener("click", openScheduler);
-schedulerCancelBtn.addEventListener("click", closeScheduler);
-schedulerConfirmBtn.addEventListener("click", confirmEvent);

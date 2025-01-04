@@ -35,6 +35,9 @@ button {
 	padding: 8px 11px;
 }
 
+button:hover {
+	cursor: pointer;
+}
 
 select {
 	border: 1px solid #f1f1f1;
@@ -42,7 +45,8 @@ select {
 	padding: 6px 5px;
 }
 
-select:focus {
+select:focus,
+textarea:focus {
   outline-color: dodgerblue;
 }
 
@@ -108,10 +112,6 @@ footer {
 	margin-bottom: 12px;
 }
 
-.add-event-btn:hover {
-	cursor: pointer;
-}
-
 #backdrop {
 	display: none;
 	position: fixed;
@@ -124,7 +124,6 @@ footer {
 }
 
 #scheduler {
-	display: 0;
 	width: 245px;
 	z-index: 2;
   border: 2px solid black;
@@ -165,6 +164,30 @@ footer {
 	background-color: rgb(0, 97, 0);
 }
 
+#delete-warning {
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	width: 410px;
+	border: 3px solid black;
+	padding: auto 10px;
+	margin-top: 350px;
+}
+
+.delete-warning-btns {
+	width: 100%;
+	justify-content: space-around;
+	margin: 25px 0;
+}
+
+.delete-warning-cancel-btn {
+	background-color: rgb(110, 118, 126);
+}
+
+.delete-warning-confirm-btn {
+	background-color: rgb(0, 97, 0);
+}
+
 .event-table-time-col {
   width: 8;
 }
@@ -184,5 +207,5 @@ footer {
 
 .event-table-delete-btn {
 	align-items: center;
-	background-color: red;
+	background-color: rgb(221, 0, 0);
 }
