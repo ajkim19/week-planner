@@ -126,7 +126,8 @@ footer {
 	background: rgba(0, 0, 0, 0.3);
 }
 
-#scheduler {
+#scheduler,
+#editor {
 	width: 245px;
 	z-index: 2;
 	border: 2px solid black;
@@ -134,38 +135,47 @@ footer {
 	margin-top: 240px;
 }
 
-.scheduler-form {
+.scheduler-form,
+.editor-form {
 	flex-direction: column;
 	width: 90%;
 	margin: 14px auto;
 }
 
 #scheduler-time,
-#scheduler-day {
+#scheduler-day,
+#editor-time,
+#editor-day {
 	width: 100%;
 	margin-bottom: 10px;
 }
 
-#scheduler-event {
+#scheduler-event,
+#editor-event {
 	height: 195px;
 	width: 97%;
 	margin-top: 8px;
 	margin-bottom: 13px;
 }
 
-.scheduler-btns {
+.scheduler-btns,
+.editor-btns {
 	justify-content: space-evenly;
 }
 
 .scheduler-cancel-btn,
-.scheduler-confirm-btn {
+.scheduler-confirm-btn,
+.editor-cancel-btn,
+.editor-confirm-btn {
 	border: 0;
 }
 
-.scheduler-cancel-btn {
+.scheduler-cancel-btn,
+.editor-cancel-btn {
 	background-color: rgb(110, 118, 126);
 }
-.scheduler-confirm-btn {
+.scheduler-confirm-btn,
+.editor-confirm-btn {
 	background-color: rgb(0, 97, 0);
 }
 

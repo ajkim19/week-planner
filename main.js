@@ -7,14 +7,15 @@ const $schedulerDay = document.getElementById("scheduler-day");
 const $schedulerEvent = document.getElementById("scheduler-event");
 const $schedulerCancelBtn = document.querySelector(".scheduler-cancel-btn");
 const $schedulerConfirmBtn = document.querySelector(".scheduler-confirm-btn");
-const $updater = document.getElementById("updater");
-const $updaterForm = document.querySelector(".updater-form");
-const $updaterTime = document.getElementById("updater-time");
-const $updaterDay = document.getElementById("updater-day");
-const $updaterEvent = document.getElementById("updater-event");
-const $updaterCancelBtn = document.querySelector(".updater-cancel-btn");
-const $updaterConfirmBtn = document.querySelector(".updater-confirm-btn");
+const $editor = document.getElementById("editor");
+const $editorForm = document.querySelector(".editor-form");
+const $editorTime = document.getElementById("editor-time");
+const $editorDay = document.getElementById("editor-day");
+const $editorEvent = document.getElementById("editor-event");
+const $editorCancelBtn = document.querySelector(".editor-cancel-btn");
+const $editorConfirmBtn = document.querySelector(".editor-confirm-btn");
 const $eventTableTBody = document.querySelector(".event-table > tbody");
+let $eventTableEditBtn = {};
 let $eventTableDeleteBtn = {};
 const $dayOfWeek = document.querySelector(".day-of-week");
 const $deleteWarning = document.getElementById("delete-warning");
@@ -94,6 +95,7 @@ function populateTable() {
 			eventTableDelete.type = "button";
 			eventTableDelete.textContent = "Delete";
 
+			// Adds the buttons to the table
 			eventTableActions.appendChild(eventTableDelete);
 			row.appendChild(eventTableActions);
 			$eventTableTBody.appendChild(row);
@@ -129,20 +131,8 @@ function closeScheduler() {
 	$schedulerForm.reset();
 }
 
-// Opens delete warning modal
-function openDeleteWarning() {
-	$deleteWarning.style.display = "block";
-	$backdrop.style.display = "block";
-}
-
-// Closes delete warming modal
-function closeDeleteWarning() {
-	$deleteWarning.style.display = "none";
-	$backdrop.style.display = "none";
-}
-
 // Adds an event to the events object
-function confirmEvent() {
+function confirmAddEvent() {
 	const day = $schedulerDay.value;
 
 	// Initializes events item if it does not exist
@@ -154,8 +144,27 @@ function confirmEvent() {
 		event: $schedulerEvent.value,
 	});
 
+	// Resets the environment for next use
 	populateTable();
 	closeScheduler();
+}
+
+//////////////////////////////////////////////
+///////                                ///////
+///////      Add Editor Functions      ///////
+///////                                ///////
+//////////////////////////////////////////////
+
+// Opens delete warning modal
+function openDeleteWarning() {
+	$deleteWarning.style.display = "block";
+	$backdrop.style.display = "block";
+}
+
+// Closes delete warming modal
+function closeDeleteWarning() {
+	$deleteWarning.style.display = "none";
+	$backdrop.style.display = "none";
 }
 
 function deleteEvent() {
@@ -169,21 +178,19 @@ function deleteEvent() {
 			break;
 		}
 	}
+	// Resets the environment for next use
 	populateTable();
 	closeDeleteWarning();
 }
 
-// Starts up setup
+// Sets up the environment for use
 populateTimesList();
 populateTable();
 
 // Allows users to add events
-// Opens the scheduler modal
 $addEventBtn.addEventListener("click", openScheduler);
-// Closes the scheduler modal
 $schedulerCancelBtn.addEventListener("click", closeScheduler);
-// Confirms adding a new event
-$schedulerConfirmBtn.addEventListener("click", confirmEvent);
+$schedulerConfirmBtn.addEventListener("click", confirmAddEvent);
 
 // Allows users to delete events
 $eventTableTBody.addEventListener("click", () => {
@@ -197,12 +204,43 @@ $eventTableTBody.addEventListener("click", () => {
 $deleteWarningCancel.addEventListener("click", closeDeleteWarning);
 $deleteWarningConfirm.addEventListener("click", deleteEvent);
 
+////////////////////////////////////////////////////////////////////
+
+// Opens editor modal
+function openEditor() {
+	$editor.showModal();
+	$backdrop.style.display = "block";
+}
+
+// Closes editor modal
+function closeEditor() {
+	$editor.close();
+	$backdrop.style.display = "none";
+	$editorForm.reset();
+}
+
+// function confirmEditEvent() {
+// 	// Obtain data of event to delete
+// 	const dayToEdit = $dayOfWeek.value;
+// 	const timeToEdit =
+// 		$eventTableEditBtn.parentNode.parentNode.childNodes[0].textContent;
+// 	for (let i = 0; i < events[dayToEdit].length; i++) {
+// 		if (events[dayToEdit][i]["time"] === timeToEdit) {
+// 		}
+// 	}
+// 	// Resets the environment for next use
+// 	populateTable();
+// 	closeDeleteWarning();
+// }
+
+/////////////////////////////////////////////////////////////////////////////////
+
 // Allows users to edit event
 $eventTableTBody.addEventListener("click", () => {
-	// Opens editor modal if the clicked element is a delete button
 	if (event.target.classList.contains("event-table-edit-btn")) {
-		// Bookmarks the edit button for later use
 		$eventTableEditBtn = event.target;
 		openEditor();
 	}
 });
+$editorCancelBtn.addEventListener("click", closeEditor);
+// $editorConfirmBtn.addEventListener("click", confirmEditEvent);
