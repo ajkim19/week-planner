@@ -175,9 +175,7 @@ $deleteWarningConfirm.addEventListener("click", () => {
 	console.log(events[dayToDelete]);
 	for (let i = 0; i < events[dayToDelete].length; i++) {
 		if (events[dayToDelete][i]["time"] === timeToDelete) {
-			console.log("events[dayToDelete]", events[dayToDelete]);
 			events[dayToDelete].splice(i, 1);
-			console.log("events[dayToDelete]", events[dayToDelete]);
 			break;
 		}
 	}
