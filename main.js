@@ -182,20 +182,4 @@ $eventTableTBody.addEventListener("click", () => {
 	}
 });
 $deleteWarningCancel.addEventListener("click", closeDeleteWarning);
-$deleteWarningConfirm.addEventListener("click", () => {
-	// Obtain data of event to delete
-	const dayToDelete = $dayOfWeek.value;
-	const timeToDelete =
-		$eventTableDeleteBtn.parentNode.parentNode.childNodes[0].textContent;
-	console.log(events[dayToDelete]);
-	for (let i = 0; i < events[dayToDelete].length; i++) {
-		if (events[dayToDelete][i]["time"] === timeToDelete) {
-			console.log("events[dayToDelete]", events[dayToDelete]);
-			events[dayToDelete].splice(i, 1);
-			console.log("events[dayToDelete]", events[dayToDelete]);
-			break;
-		}
-	}
-	populateTable();
-	closeDeleteWarning();
-});
+$deleteWarningConfirm.addEventListener("click", deleteEvent);
