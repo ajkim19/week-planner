@@ -47,14 +47,14 @@ select {
 
 select:focus,
 textarea:focus {
-  outline-color: dodgerblue;
+	outline-color: dodgerblue;
 }
 
 table {
 	border-collapse: collapse;
 	width: 100%;
-  margin: bottom;
-  margin-bottom: 43px;
+	margin: bottom;
+	margin-bottom: 43px;
 }
 
 tr:nth-child(odd) {
@@ -77,7 +77,7 @@ th {
 
 footer {
 	align-self: start;
-  margin
+	margin: 10px 0;
 }
 
 .container {
@@ -92,12 +92,14 @@ footer {
 	display: flex;
 }
 
+/* Title area */
 .day-show-event {
 	flex-direction: column;
 	align-items: center;
 }
 
-.day-of-week-title, .day-of-week {
+.day-of-week-title,
+.day-of-week {
 	width: 120px;
 	margin-top: 4px;
 	margin-bottom: 4px;
@@ -112,21 +114,22 @@ footer {
 	margin-bottom: 12px;
 }
 
+/* Scheduler modal */
 #backdrop {
 	display: none;
 	position: fixed;
+	z-index: 1;
 	top: 0;
 	bottom: 0;
-  width: 100vw;
-  height: 100vh;
+	width: 100vw;
+	height: 100vh;
 	background: rgba(0, 0, 0, 0.3);
-	z-index: 1;
 }
 
 #scheduler {
 	width: 245px;
 	z-index: 2;
-  border: 2px solid black;
+	border: 2px solid black;
 	padding: 0;
 	margin-top: 240px;
 }
@@ -137,7 +140,8 @@ footer {
 	margin: 14px auto;
 }
 
-#scheduler-time, #scheduler-day {
+#scheduler-time,
+#scheduler-day {
 	width: 100%;
 	margin-bottom: 10px;
 }
@@ -153,7 +157,8 @@ footer {
 	justify-content: space-evenly;
 }
 
-.scheduler-cancel-btn, .scheduler-confirm-btn {
+.scheduler-cancel-btn,
+.scheduler-confirm-btn {
 	border: 0;
 }
 
@@ -164,8 +169,10 @@ footer {
 	background-color: rgb(0, 97, 0);
 }
 
+/* Delete warning modal */
 #delete-warning {
 	display: none;
+	z-index: 2;
 	flex-direction: column;
 	align-items: center;
 	width: 410px;
@@ -188,12 +195,13 @@ footer {
 	background-color: rgb(0, 97, 0);
 }
 
+/* Event Table */
 .event-table-time-col {
-  width: 8;
+	width: 100px;
 }
 
 .event-table-info-col {
-  width: 365px;
+	width: 365px;
 }
 
 .event-table-actions {

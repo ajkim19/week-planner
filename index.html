@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Week Planner</title>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -31,7 +32,9 @@
 				</select>
 			</div>
 			<button type="button" class="add-event-btn">Add New Event</button>
+			<!-- Back drop for modals -->
 			<div id="backdrop"></div>
+			<!-- Add event modal -->
 			<dialog id="scheduler">
 				<form class="scheduler-form flex">
 					<label for="scheduler-time">Time of Event:</label>
@@ -56,6 +59,7 @@
 						<button type="button" class="scheduler-confirm-btn">Confirm</button>
 					</div>
 				</form>
+				<!-- Delete warning modal -->
 			</dialog>
 			<dialog id="delete-warning" class="flex">
 				<h3>Are you sure you want to delete this event?</h3>
@@ -68,6 +72,7 @@
 					</button>
 				</div>
 			</dialog>
+			<!-- Event Table -->
 			<table class="event-table">
 				<thead>
 					<tr>

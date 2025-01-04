@@ -1,38 +1,30 @@
-// Query DOM for utilized elements
-const addEventBtn = document.querySelector(".add-event-btn");
-if (!addEventBtn) throw new Error("addEventBtn does not exist");
-const backdrop = document.getElementById("backdrop");
-if (!backdrop) throw new Error("backdrop does not exist");
-const scheduler = document.getElementById("scheduler");
-if (!scheduler) throw new Error("scheduler does not exist");
-const schedulerForm = document.querySelector(".scheduler-form");
-if (!schedulerForm) throw new Error("schedulerForm does not exist");
-const schedulerTime = document.getElementById("scheduler-time");
-if (!schedulerTime) throw new Error("schedulerTime does not exist");
-const schedulerDay = document.getElementById("scheduler-day");
-if (!schedulerDay) throw new Error("schedulerDay does not exist");
-const schedulerEvent = document.getElementById("scheduler-event");
-if (!schedulerEvent) throw new Error("schedulerEvent does not exist");
-const schedulerCancelBtn = document.querySelector(".scheduler-cancel-btn");
-if (!schedulerCancelBtn) throw new Error("schedulerCancelBtn does not exist");
-const schedulerConfirmBtn = document.querySelector(".scheduler-confirm-btn");
-if (!schedulerConfirmBtn) throw new Error("schedulerConfirmBtn does not exist");
-const eventTableTBody = document.querySelector(".event-table > tbody");
-if (!eventTableTBody) throw new Error("eventTableTBody does not exist");
-const dayOfWeek = document.querySelector(".day-of-week");
-if (!dayOfWeek) throw new Error("dayOfWeek does not exist");
-const eventDeleteBtn = document.getElementsByClassName(
-	"event-table-delete-btn"
+const $addEventBtn = document.querySelector(".add-event-btn");
+const $backdrop = document.getElementById("backdrop");
+const $scheduler = document.getElementById("scheduler");
+const $schedulerForm = document.querySelector(".scheduler-form");
+const $schedulerTime = document.getElementById("scheduler-time");
+const $schedulerDay = document.getElementById("scheduler-day");
+const $schedulerEvent = document.getElementById("scheduler-event");
+const $schedulerCancelBtn = document.querySelector(".scheduler-cancel-btn");
+const $schedulerConfirmBtn = document.querySelector(".scheduler-confirm-btn");
+const $eventTableTBody = document.querySelector(".event-table > tbody");
+let $eventTableDeleteBtn = {};
+const $dayOfWeek = document.querySelector(".day-of-week");
+const $deleteWarning = document.getElementById("delete-warning");
+const $deleteWarningCancel = document.querySelector(
+	".delete-warning-cancel-btn"
 );
-if (!eventDeleteBtn) throw new Error("eventDeleteBtn does not exist");
-const deleteWarning = document.getElementById("delete-warning");
-if (!deleteWarning) throw new Error("deleteWarning does not exist");
+const $deleteWarningConfirm = document.querySelector(
+	".delete-warning-confirm-btn"
+);
 
-// Initializes events object and adds first event
+// Initializes events object and adds events
 const events = { monday: [] };
-events.monday.push({ event: "Dog Park", time: "1200" });
+events.monday.push({ event: "Dog Park 1", time: "1200" });
+events["tuesday"] = [];
+events.tuesday.push({ event: "Dog Park 2", time: "1200" });
 
-// Populates list of times in the scheduler
+// Populates list of times in the $scheduler
 function populateTimesList() {
 	for (let i = 0; i < 24; i++) {
 		// Ensures two-digit hours
@@ -42,21 +34,21 @@ function populateTimesList() {
 		const onHour = document.createElement("option");
 		onHour.value = `${hr}00`;
 		onHour.text = `${hr}00`;
-		schedulerTime.appendChild(onHour);
+		$schedulerTime.appendChild(onHour);
 
 		// Adds times that are on the half hour
 		const onHalfHour = document.createElement("option");
 		onHalfHour.value = `${hr}30`;
 		onHalfHour.text = `${hr}30`;
-		schedulerTime.appendChild(onHalfHour);
+		$schedulerTime.appendChild(onHalfHour);
 	}
 }
 
 // Populates the table with events, then with empty rows
 function populateTable() {
 	// Resets the table by removing existing rows
-	eventTableTBody.innerHTML = "";
-	const day = dayOfWeek.value;
+	$eventTableTBody.innerHTML = "";
+	const day = $dayOfWeek.value;
 	let eventCounter = 0;
 
 	// Checks for existence of event
@@ -94,9 +86,10 @@ function populateTable() {
 			eventTableDelete.className = "event-table-delete-btn flex";
 			eventTableDelete.type = "button";
 			eventTableDelete.textContent = "Delete";
+
 			eventTableActions.appendChild(eventTableDelete);
 			row.appendChild(eventTableActions);
-			eventTableTBody.appendChild(row);
+			$eventTableTBody.appendChild(row);
 
 			eventCounter++;
 		}
@@ -109,7 +102,7 @@ function populateTable() {
 					const cell = document.createElement("td");
 					row.appendChild(cell);
 				}
-				eventTableTBody.appendChild(row);
+				$eventTableTBody.appendChild(row);
 				eventCounter++;
 			}
 		}
@@ -118,30 +111,40 @@ function populateTable() {
 
 // Opens scheduler modal
 function openScheduler() {
-	scheduler.showModal();
-	backdrop.style.display = "block";
+	$scheduler.showModal();
+	$backdrop.style.display = "block";
 }
 
 // Closes scheduler modal
 function closeScheduler() {
-	scheduler.close();
-	backdrop.style.display = "none";
-	schedulerForm.reset();
+	$scheduler.close();
+	$backdrop.style.display = "none";
+	$schedulerForm.reset();
+}
+
+// Opens delete warning modal
+function openDeleteWarning() {
+	$deleteWarning.style.display = "block";
+	$backdrop.style.display = "block";
+}
+
+// Closes delete warming modal
+function closeDeleteWarning() {
+	$deleteWarning.style.display = "none";
+	$backdrop.style.display = "none";
 }
 
 // Adds an event to the events object
 function confirmEvent() {
-	const day = schedulerDay.value;
+	const day = $schedulerDay.value;
 
-	// Checks for existence of event
-	if (!events[day]) {
-		events[day] = [];
-	}
+	// Initializes events item if it does not exist
+	!events[day] ? (events[day] = []) : null;
 
-	// Adds the event
+	// Adds the event to the events object
 	events[day].push({
-		time: schedulerTime.value,
-		event: schedulerEvent.value,
+		time: $schedulerTime.value,
+		event: $schedulerEvent.value,
 	});
 
 	populateTable();
@@ -151,3 +154,33 @@ function confirmEvent() {
 // Starts up setup
 populateTimesList();
 populateTable();
+
+$addEventBtn.addEventListener("click", openScheduler);
+$schedulerCancelBtn.addEventListener("click", closeScheduler);
+$schedulerConfirmBtn.addEventListener("click", confirmEvent);
+$eventTableTBody.addEventListener("click", () => {
+	// Opens delete warning modal if the clicked element is a delete button
+	if (event.target.classList.contains("event-table-delete-btn")) {
+		// Bookmarks the delete button for later use
+		$eventTableDeleteBtn = event.target;
+		openDeleteWarning();
+	}
+});
+$deleteWarningCancel.addEventListener("click", closeDeleteWarning);
+$deleteWarningConfirm.addEventListener("click", () => {
+	// Obtain data of event to delete
+	const dayToDelete = $dayOfWeek.value;
+	const timeToDelete =
+		$eventTableDeleteBtn.parentNode.parentNode.childNodes[0].textContent;
+	console.log(events[dayToDelete]);
+	for (let i = 0; i < events[dayToDelete].length; i++) {
+		if (events[dayToDelete][i]["time"] === timeToDelete) {
+			console.log("events[dayToDelete]", events[dayToDelete]);
+			events[dayToDelete].splice(i, 1);
+			console.log("events[dayToDelete]", events[dayToDelete]);
+			break;
+		}
+	}
+	populateTable();
+	closeDeleteWarning();
+});
