@@ -7,6 +7,13 @@ const $schedulerDay = document.getElementById("scheduler-day");
 const $schedulerEvent = document.getElementById("scheduler-event");
 const $schedulerCancelBtn = document.querySelector(".scheduler-cancel-btn");
 const $schedulerConfirmBtn = document.querySelector(".scheduler-confirm-btn");
+const $updater = document.getElementById("updater");
+const $updaterForm = document.querySelector(".updater-form");
+const $updaterTime = document.getElementById("updater-time");
+const $updaterDay = document.getElementById("updater-day");
+const $updaterEvent = document.getElementById("updater-event");
+const $updaterCancelBtn = document.querySelector(".updater-cancel-btn");
+const $updaterConfirmBtn = document.querySelector(".updater-confirm-btn");
 const $eventTableTBody = document.querySelector(".event-table > tbody");
 let $eventTableDeleteBtn = {};
 const $dayOfWeek = document.querySelector(".day-of-week");
@@ -170,9 +177,15 @@ function deleteEvent() {
 populateTimesList();
 populateTable();
 
+// Allows users to add events
+// Opens the scheduler modal
 $addEventBtn.addEventListener("click", openScheduler);
+// Closes the scheduler modal
 $schedulerCancelBtn.addEventListener("click", closeScheduler);
+// Confirms adding a new event
 $schedulerConfirmBtn.addEventListener("click", confirmEvent);
+
+// Allows users to delete events
 $eventTableTBody.addEventListener("click", () => {
 	// Opens delete warning modal if the clicked element is a delete button
 	if (event.target.classList.contains("event-table-delete-btn")) {
@@ -183,3 +196,13 @@ $eventTableTBody.addEventListener("click", () => {
 });
 $deleteWarningCancel.addEventListener("click", closeDeleteWarning);
 $deleteWarningConfirm.addEventListener("click", deleteEvent);
+
+// Allows users to edit event
+$eventTableTBody.addEventListener("click", () => {
+	// Opens editor modal if the clicked element is a delete button
+	if (event.target.classList.contains("event-table-edit-btn")) {
+		// Bookmarks the edit button for later use
+		$eventTableEditBtn = event.target;
+		openEditor();
+	}
+});

@@ -58,8 +58,34 @@
 						<button type="button" class="scheduler-confirm-btn">Confirm</button>
 					</div>
 				</form>
-				<!-- Delete warning modal -->
 			</dialog>
+			<!-- update event modal -->
+			<dialog id="updater">
+				<form class="updater-form flex">
+					<label for="updater-time">Time of Event:</label>
+					<select name="updater-time" id="updater-time">
+						<option value="none" selected disabled hidden>Choose a Time</option>
+					</select>
+					<label for="updater-day">Day of Week:</label>
+					<select name="updater-day" id="updater-day">
+						<option value="none" selected disabled hidden>Choose a Day</option>
+						<option value="monday">Monday</option>
+						<option value="tuesday">Tuesday</option>
+						<option value="wednesday">Wednesday</option>
+						<option value="thursday">Thursday</option>
+						<option value="friday">Friday</option>
+						<option value="saturday">Saturday</option>
+						<option value="sunday">Sunday</option>
+					</select>
+					<label for="updater-event">Event Information:</label>
+					<textarea name="updater-event" id="updater-event"></textarea>
+					<div class="updater-btns flex">
+						<button type="button" class="updater-cancel-btn">Cancel</button>
+						<button type="button" class="updater-confirm-btn">Confirm</button>
+					</div>
+				</form>
+			</dialog>
+			<!-- Delete warning modal -->
 			<dialog id="delete-warning" class="flex">
 				<h3>Are you sure you want to delete this event?</h3>
 				<div class="delete-warning-btns flex">
