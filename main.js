@@ -241,8 +241,6 @@ function closeDeleteWarning() {
 function deleteEvent() {
 	// Obtain data of event to delete
 	const dayToDelete = $dayOfWeek.value;
-	const timeToDelete =
-		$eventTarget.parentNode.parentNode.childNodes[0].textContent;
 	for (let i = 0; i < events[dayToDelete].length; i++) {
 		if (events[dayToDelete][i]["time"] === timeToDelete) {
 			events[dayToDelete].splice(i, 1);
@@ -289,6 +287,9 @@ $eventTableTBody.addEventListener("click", () => {
 	if (event.target.classList.contains("event-table-delete-btn")) {
 		// Bookmarks the delete button for later use
 		$eventTarget = event.target;
+		verificationNumString =
+			$eventTarget.parentNode.parentNode.childNodes[0].childNodes[1]
+				.textContent;
 		openDeleteWarning();
 	}
 });
