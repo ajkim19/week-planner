@@ -242,7 +242,7 @@ function deleteEvent() {
 	// Obtain data of event to delete
 	const dayToDelete = $dayOfWeek.value;
 	for (let i = 0; i < events[dayToDelete].length; i++) {
-		if (events[dayToDelete][i]["time"] === timeToDelete) {
+		if (events[dayToDelete][i]["verification"] === verificationNumString) {
 			events[dayToDelete].splice(i, 1);
 			$eventTarget = {};
 			break;
