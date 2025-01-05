@@ -180,13 +180,13 @@ function confirmAddEvent() {
 		!!$schedulerTime.value &&
 		!!$schedulerDay.value &&
 		!!$schedulerEvent.value
-	)
+	) {
 		events[day].push({
 			time: $schedulerTime.value,
 			event: $schedulerEvent.value,
 			verification: String(Date.now()),
 		});
-
+	}
 	// Resets the environment for next use
 	populateTable();
 	closeScheduler();
