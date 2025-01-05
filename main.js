@@ -87,9 +87,9 @@ function populateTable() {
 			row.appendChild(eventTableTime);
 
 			// Creates a hidden verification number div within time cell
-			const eventTableVerNum = document.createElement("div");
-			eventTableVerNum.id = "event-verification-number";
-			row.appendChild(eventTableTime);
+			const eventTableVerification = document.createElement("div");
+			eventTableVerification.id = "event-table-verification";
+			eventTableTime.appendChild(eventTableVerification);
 
 			// Creates the event cell
 			const eventTableEvent = document.createElement("td");
@@ -200,6 +200,7 @@ function confirmEditEvent() {
 	events[day].push({
 		time: $editorTime.value,
 		event: $editorEvent.value,
+		verification: String(Date.now()),
 	});
 
 	// Resets the environment for next use
