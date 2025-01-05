@@ -184,6 +184,7 @@ function confirmAddEvent() {
 		events[day].push({
 			time: $schedulerTime.value,
 			event: $schedulerEvent.value,
+			verification: String(Date.now()),
 		});
 
 	// Resets the environment for next use
@@ -218,7 +219,7 @@ function confirmEditEvent() {
 	events[day].push({
 		time: $editorTime.value,
 		event: $editorEvent.value,
-		verification: String(Date.now()),
+		verification: verificationNumString,
 	});
 
 	// Resets the environment for next use
