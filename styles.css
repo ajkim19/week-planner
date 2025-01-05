@@ -233,4 +233,7 @@ footer {
 	display: none;
 	width: none;
 	height: none;
+	padding: none;
+	border: none;
+	margin: none;
 }

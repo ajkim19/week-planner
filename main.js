@@ -24,14 +24,31 @@ const $deleteWarningConfirm = document.querySelector(
 	".delete-warning-confirm-btn"
 );
 let $eventTarget = {};
+let verificationNumString = "";
 
 // Initializes events object and adds events
 const events = { monday: [] };
-events.monday.push({ event: "Dog Park 1", time: "1200" });
-events.monday.push({ event: "Dog Park 2", time: "1600" });
-events.monday.push({ event: "Dog Park 3", time: "0300" });
+events.monday.push({
+	event: "Dog Park 1",
+	time: "1200",
+	verification: "0000000000001",
+});
+events.monday.push({
+	event: "Dog Park 2",
+	time: "1600",
+	verification: "0000000000002",
+});
+events.monday.push({
+	event: "Dog Park 3",
+	time: "0300",
+	verification: "0000000000003",
+});
 events["tuesday"] = [];
-events.tuesday.push({ event: "Dog Park 4", time: "1200" });
+events.tuesday.push({
+	event: "Dog Park 4",
+	time: "1200",
+	verification: "0000000000004",
+});
 
 // Populates list of times in the $scheduler
 function populateTimesList() {
@@ -89,6 +106,7 @@ function populateTable() {
 			// Creates a hidden verification number div within time cell
 			const eventTableVerification = document.createElement("div");
 			eventTableVerification.id = "event-table-verification";
+			eventTableVerification.textContent = event.verification;
 			eventTableTime.appendChild(eventTableVerification);
 
 			// Creates the event cell
@@ -254,6 +272,9 @@ $eventTableTBody.addEventListener("click", () => {
 		$eventTarget = event.target;
 		$editorTime.value =
 			$eventTarget.parentNode.parentNode.childNodes[0].textContent;
+		verificationNumString =
+			$eventTarget.parentNode.parentNode.childNodes[0].childNodes[1]
+				.textContent;
 		$editorEvent.value =
 			$eventTarget.parentNode.parentNode.childNodes[1].textContent;
 		openEditor();
@@ -274,7 +295,5 @@ $eventTableTBody.addEventListener("click", () => {
 $deleteWarningCancel.addEventListener("click", closeDeleteWarning);
 $deleteWarningConfirm.addEventListener("click", deleteEvent);
 
+// Refreshes the table relative to the day-of-week selection
 $dayOfWeek.addEventListener("input", populateTable);
-
-console.log("Date.now()", Date.now(), typeof Date.now());
-console.log("new Date().getTime()", new Date().getTime());
