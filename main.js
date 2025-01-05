@@ -259,3 +259,5 @@ $eventTableTBody.addEventListener("click", () => {
 });
 $deleteWarningCancel.addEventListener("click", closeDeleteWarning);
 $deleteWarningConfirm.addEventListener("click", deleteEvent);
+
+$dayOfWeek.addEventListener("input", populateTable);
