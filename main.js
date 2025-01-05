@@ -153,10 +153,11 @@ function confirmAddEvent() {
 	!events[day] ? (events[day] = []) : null;
 
 	// Adds the event to the events object
-	events[day].push({
-		time: $schedulerTime.value,
-		event: $schedulerEvent.value,
-	});
+	if (!!$schedulerTime.value && !!$scheduler.value)
+		events[day].push({
+			time: $schedulerTime.value,
+			event: $schedulerEvent.value,
+		});
 
 	// Resets the environment for next use
 	populateTable();
