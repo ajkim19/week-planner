@@ -116,18 +116,18 @@ function populateTable() {
 
 			eventCounter++;
 		}
+	}
 
-		// Populates the rest of the table with empty rows
-		if (eventCounter < 10) {
-			for (let i = eventCounter; i < 10; i++) {
-				const row = document.createElement("tr");
-				for (let j = 0; j < 3; j++) {
-					const cell = document.createElement("td");
-					row.appendChild(cell);
-				}
-				$eventTableTBody.appendChild(row);
-				eventCounter++;
+	// Populates the rest of the table with empty rows
+	if (eventCounter < 10) {
+		for (let i = eventCounter; i < 10; i++) {
+			const row = document.createElement("tr");
+			for (let j = 0; j < 3; j++) {
+				const cell = document.createElement("td");
+				row.appendChild(cell);
 			}
+			$eventTableTBody.appendChild(row);
+			eventCounter++;
 		}
 	}
 }
