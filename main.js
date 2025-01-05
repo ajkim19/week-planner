@@ -153,7 +153,11 @@ function confirmAddEvent() {
 	!events[day] ? (events[day] = []) : null;
 
 	// Adds the event to the events object
-	if (!!$schedulerTime.value && !!$scheduler.value)
+	if (
+		!!$schedulerTime.value &&
+		!!$schedulerDay.value &&
+		!!$schedulerEvent.value
+	)
 		events[day].push({
 			time: $schedulerTime.value,
 			event: $schedulerEvent.value,
