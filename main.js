@@ -28,8 +28,10 @@ let $eventTarget = {};
 // Initializes events object and adds events
 const events = { monday: [] };
 events.monday.push({ event: "Dog Park 1", time: "1200" });
+events.monday.push({ event: "Dog Park 2", time: "1600" });
+events.monday.push({ event: "Dog Park 3", time: "0300" });
 events["tuesday"] = [];
-events.tuesday.push({ event: "Dog Park 2", time: "1200" });
+events.tuesday.push({ event: "Dog Park 4", time: "1200" });
 
 // Populates list of times in the $scheduler
 function populateTimesList() {
@@ -72,6 +74,7 @@ function populateTable() {
 
 	// Checks for existence of event
 	if (events[day]) {
+		events[day].sort((a, b) => a.time - b.time);
 		// Loops through events of specified day
 		for (const event of events[day]) {
 			// Creates new row with events
