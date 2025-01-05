@@ -86,6 +86,11 @@ function populateTable() {
 			eventTableTime.textContent = event.time;
 			row.appendChild(eventTableTime);
 
+			// Creates a hidden verification number div within time cell
+			const eventTableVerNum = document.createElement("div");
+			eventTableVerNum.id = "event-verification-number";
+			row.appendChild(eventTableTime);
+
 			// Creates the event cell
 			const eventTableEvent = document.createElement("td");
 			eventTableEvent.className = "event-table-event";
@@ -269,3 +274,6 @@ $deleteWarningCancel.addEventListener("click", closeDeleteWarning);
 $deleteWarningConfirm.addEventListener("click", deleteEvent);
 
 $dayOfWeek.addEventListener("input", populateTable);
+
+console.log("Date.now()", Date.now(), typeof Date.now());
+console.log("new Date().getTime()", new Date().getTime());

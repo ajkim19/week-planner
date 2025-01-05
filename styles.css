@@ -228,3 +228,9 @@ footer {
 	align-items: center;
 	background-color: rgb(221, 0, 0);
 }
+
+#event-verification-number {
+	display: none;
+	width: none;
+	height: none;
+}
