@@ -63,8 +63,9 @@ tr:nth-child(odd) {
 
 td,
 th {
+	box-sizing: border-box;
 	text-align: left;
-	height: 26px;
+	height: 45px;
 	border: 1px solid #ececec;
 	padding: 8px 6px;
 }
