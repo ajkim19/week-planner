@@ -15,8 +15,6 @@ const $editorEvent = document.getElementById("editor-event");
 const $editorCancelBtn = document.querySelector(".editor-cancel-btn");
 const $editorConfirmBtn = document.querySelector(".editor-confirm-btn");
 const $eventTableTBody = document.querySelector(".event-table > tbody");
-let $eventTableEditBtn = {};
-let $eventTableDeleteBtn = {};
 const $dayOfWeek = document.querySelector(".day-of-week");
 const $deleteWarning = document.getElementById("delete-warning");
 const $deleteWarningCancel = document.querySelector(
@@ -25,6 +23,7 @@ const $deleteWarningCancel = document.querySelector(
 const $deleteWarningConfirm = document.querySelector(
 	".delete-warning-confirm-btn"
 );
+let $eventTarget = {};
 
 // Initializes events object and adds events
 const events = { monday: [] };
@@ -38,17 +37,29 @@ function populateTimesList() {
 		// Ensures two-digit hours
 		const hr = i.toString().padStart(2, "0");
 
-		// Adds times that are on the hour
-		const onHour = document.createElement("option");
-		onHour.value = `${hr}00`;
-		onHour.text = `${hr}00`;
-		$schedulerTime.appendChild(onHour);
+		// Adds times that are on the hour to scheduler
+		const onHourScheduler = document.createElement("option");
+		onHourScheduler.value = `${hr}00`;
+		onHourScheduler.text = `${hr}00`;
+		$schedulerTime.appendChild(onHourScheduler);
 
-		// Adds times that are on the half hour
-		const onHalfHour = document.createElement("option");
-		onHalfHour.value = `${hr}30`;
-		onHalfHour.text = `${hr}30`;
-		$schedulerTime.appendChild(onHalfHour);
+		// Adds times that are on the half hour to scheduler
+		const onHalfHourScheduler = document.createElement("option");
+		onHalfHourScheduler.value = `${hr}30`;
+		onHalfHourScheduler.text = `${hr}30`;
+		$schedulerTime.appendChild(onHalfHourScheduler);
+
+		// Adds times that are on the hour to editor
+		const onHourEditor = document.createElement("option");
+		onHourEditor.value = `${hr}00`;
+		onHourEditor.text = `${hr}00`;
+		$editorTime.appendChild(onHourEditor);
+
+		// Adds times that are on the half hour to editor
+		const onHalfHourEditor = document.createElement("option");
+		onHalfHourEditor.value = `${hr}30`;
+		onHalfHourEditor.text = `${hr}30`;
+		$editorTime.appendChild(onHalfHourEditor);
 	}
 }
 
@@ -149,11 +160,39 @@ function confirmAddEvent() {
 	closeScheduler();
 }
 
-//////////////////////////////////////////////
-///////                                ///////
-///////      Add Editor Functions      ///////
-///////                                ///////
-//////////////////////////////////////////////
+// Opens editor modal
+function openEditor() {
+	$editor.showModal();
+	$backdrop.style.display = "block";
+}
+
+// Closes editor modal
+function closeEditor() {
+	$editor.close();
+	$backdrop.style.display = "none";
+	$editorForm.reset();
+}
+
+// Edits an event to the events object
+function confirmEditEvent() {
+	// Deletes the current event entry in events object
+	deleteEvent();
+
+	const day = $editorDay.value;
+
+	// Initializes events item if it does not exist
+	!events[day] ? (events[day] = []) : null;
+
+	// Adds the event to the events object
+	events[day].push({
+		time: $editorTime.value,
+		event: $editorEvent.value,
+	});
+
+	// Resets the environment for next use
+	populateTable();
+	closeEditor();
+}
 
 // Opens delete warning modal
 function openDeleteWarning() {
@@ -171,10 +210,11 @@ function deleteEvent() {
 	// Obtain data of event to delete
 	const dayToDelete = $dayOfWeek.value;
 	const timeToDelete =
-		$eventTableDeleteBtn.parentNode.parentNode.childNodes[0].textContent;
+		$eventTarget.parentNode.parentNode.childNodes[0].textContent;
 	for (let i = 0; i < events[dayToDelete].length; i++) {
 		if (events[dayToDelete][i]["time"] === timeToDelete) {
 			events[dayToDelete].splice(i, 1);
+			$eventTarget = {};
 			break;
 		}
 	}
@@ -187,60 +227,35 @@ function deleteEvent() {
 populateTimesList();
 populateTable();
 
-// Allows users to add events
+// Allows users to add an event
 $addEventBtn.addEventListener("click", openScheduler);
 $schedulerCancelBtn.addEventListener("click", closeScheduler);
 $schedulerConfirmBtn.addEventListener("click", confirmAddEvent);
 
-// Allows users to delete events
+// Allows users to edit an event
+$eventTableTBody.addEventListener("click", () => {
+	if (event.target.classList.contains("event-table-edit-btn")) {
+		// Matches the editor event details with the data from the table
+		$editorDay.value = $dayOfWeek.value;
+		$eventTarget = event.target;
+		$editorTime.value =
+			$eventTarget.parentNode.parentNode.childNodes[0].textContent;
+		$editorEvent.value =
+			$eventTarget.parentNode.parentNode.childNodes[1].textContent;
+		openEditor();
+	}
+});
+$editorCancelBtn.addEventListener("click", closeEditor);
+$editorConfirmBtn.addEventListener("click", confirmEditEvent);
+
+// Allows users to delete an event
 $eventTableTBody.addEventListener("click", () => {
 	// Opens delete warning modal if the clicked element is a delete button
 	if (event.target.classList.contains("event-table-delete-btn")) {
 		// Bookmarks the delete button for later use
-		$eventTableDeleteBtn = event.target;
+		$eventTarget = event.target;
 		openDeleteWarning();
 	}
 });
 $deleteWarningCancel.addEventListener("click", closeDeleteWarning);
 $deleteWarningConfirm.addEventListener("click", deleteEvent);
-
-////////////////////////////////////////////////////////////////////
-
-// Opens editor modal
-function openEditor() {
-	$editor.showModal();
-	$backdrop.style.display = "block";
-}
-
-// Closes editor modal
-function closeEditor() {
-	$editor.close();
-	$backdrop.style.display = "none";
-	$editorForm.reset();
-}
-
-// function confirmEditEvent() {
-// 	// Obtain data of event to delete
-// 	const dayToEdit = $dayOfWeek.value;
-// 	const timeToEdit =
-// 		$eventTableEditBtn.parentNode.parentNode.childNodes[0].textContent;
-// 	for (let i = 0; i < events[dayToEdit].length; i++) {
-// 		if (events[dayToEdit][i]["time"] === timeToEdit) {
-// 		}
-// 	}
-// 	// Resets the environment for next use
-// 	populateTable();
-// 	closeDeleteWarning();
-// }
-
-/////////////////////////////////////////////////////////////////////////////////
-
-// Allows users to edit event
-$eventTableTBody.addEventListener("click", () => {
-	if (event.target.classList.contains("event-table-edit-btn")) {
-		$eventTableEditBtn = event.target;
-		openEditor();
-	}
-});
-$editorCancelBtn.addEventListener("click", closeEditor);
-// $editorConfirmBtn.addEventListener("click", confirmEditEvent);
