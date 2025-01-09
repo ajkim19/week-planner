@@ -249,6 +249,10 @@ function confirmAddEvent(): void {
 			event: $schedulerEvent.value,
 			verification: String(Date.now()),
 		});
+
+		// Stores data locally as a JSON
+		const eventsJSON = JSON.stringify(events);
+		localStorage.setItem("events-storage", eventsJSON);
 	}
 	// Resets the environment for next use
 	populateTable();
@@ -298,12 +302,9 @@ function confirmEditEvent(): void {
 	// Deletes the current event entry in events object
 	deleteEvent();
 
-	const day = $editorDay.value;
-
-	// Initializes events item if it does not exist
-	!events[day] ? (events[day] = []) : null;
-
 	// Adds the event to the events object
+	const day = $editorDay.value;
+	!events[day] ? (events[day] = []) : null;
 	events[day].push({
 		time: $editorTime.value,
 		event: $editorEvent.value,
