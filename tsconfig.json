@@ -1,0 +1,10 @@
+{
+	"extends": [
+		"/workspaces/m1-1024-code-solutions/tsconfig.json",
+		"/workspaces/m1-1024-code-solutions/node_modules/@learningfuze/lfz-config/config/tsconfig.json"
+	],
+	"compilerOptions": {
+		"noEmit": false,
+		"moduleDetection": "legacy"
+	}
+}
