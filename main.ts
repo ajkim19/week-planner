@@ -81,29 +81,19 @@ let $eventTarget: EventTarget | null = null;
 let day: string = "";
 let verificationNumString = "";
 
-// Initializes events object and adds events
-const events: { [key: string]: EventData[] } = { monday: [] };
-events.monday.push({
-	event: "Dog Park 1",
-	time: "1200",
-	verification: "0000000000001",
-});
-events.monday.push({
-	event: "Dog Park 2",
-	time: "1600",
-	verification: "0000000000002",
-});
-events.monday.push({
-	event: "Dog Park 3",
-	time: "0300",
-	verification: "0000000000003",
-});
-events["tuesday"] = [];
-events.tuesday.push({
-	event: "Dog Park 4",
-	time: "1200",
-	verification: "0000000000004",
-});
+// Stores events in JSON format to localStorage
+function writeEvents(events: { [key: string]: EventData[] }): void {
+	const eventsJSON = JSON.stringify(events);
+	localStorage.setItem("events-storage", eventsJSON);
+}
+
+// Retrieves events from localStorage and parses JSON
+function readEvents(): { [key: string]: EventData[] } {
+	const eventsJSON = localStorage.getItem("events-storage");
+	if (!eventsJSON) return {};
+	const events = JSON.parse(eventsJSON);
+	return events;
+}
 
 // Populates list of times in the $scheduler
 function populateTimesList(): void {
@@ -144,8 +134,11 @@ function populateTimesList(): void {
 
 // Populates the table with events, then with empty rows
 function populateTable(): void {
+	// Pulls existing event data from local storage
+	const events = readEvents();
+
 	// Resets the table by removing existing rows
-	if (!!$eventTableTBody && !!$dayOfWeek) {
+	if ($eventTableTBody && $dayOfWeek) {
 		$eventTableTBody.innerHTML = "";
 		$dayOfWeek as HTMLInputElement;
 		day = $dayOfWeek.value;
@@ -233,12 +226,12 @@ function closeScheduler(): void {
 
 // Adds an event to the events object
 function confirmAddEvent(): void {
-	const day = $schedulerDay.value;
-
-	// Initializes events item if it does not exist
-	!events[day] ? (events[day] = []) : null;
+	// Pulls existing event data from local storage
+	const events = readEvents();
 
 	// Adds the event to the events object
+	const day = $schedulerDay.value;
+	!events[day] ? (events[day] = []) : null;
 	if (
 		!!$schedulerTime.value &&
 		!!$schedulerDay.value &&
@@ -249,6 +242,9 @@ function confirmAddEvent(): void {
 			event: $schedulerEvent.value,
 			verification: String(Date.now()),
 		});
+
+		// Stores the day with the new additions
+		writeEvents(events);
 	}
 	// Resets the environment for next use
 	populateTable();
@@ -295,20 +291,23 @@ function closeEditor(): void {
 
 // Edits an event to the events object
 function confirmEditEvent(): void {
+	// Pulls existing event data from local storage
+	const events = readEvents();
+
 	// Deletes the current event entry in events object
 	deleteEvent();
 
-	const day = $editorDay.value;
-
-	// Initializes events item if it does not exist
-	!events[day] ? (events[day] = []) : null;
-
 	// Adds the event to the events object
+	const day = $editorDay.value;
+	!events[day] ? (events[day] = []) : null;
 	events[day].push({
 		time: $editorTime.value,
 		event: $editorEvent.value,
 		verification: verificationNumString,
 	});
+
+	// Stores the day with the new changes
+	writeEvents(events);
 
 	// Resets environment for next use
 	populateTable();
@@ -343,6 +342,9 @@ function closeDeleteWarning(): void {
 }
 
 function deleteEvent(): void {
+	// Pulls existing event data from local storage
+	const events = readEvents();
+
 	// Obtain data of event to delete
 	const dayToDelete = $dayOfWeek.value;
 	for (let i = 0; i < events[dayToDelete].length; i++) {
